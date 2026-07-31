@@ -437,8 +437,11 @@ body[data-cast="live"] .cast-badge i{box-shadow:0 0 10px var(--tally);animation:
 
 /* ── responsive ────────────────────────────────────────── */
 @media (max-width:1120px){
-  .console{grid-template-columns:minmax(0,1fr) 232px}
-  .plaque{padding:8px}
+  .console{grid-template-columns:1fr;grid-template-rows:200px minmax(0,1fr)}
+  .monitor{flex:none;height:100%}
+  .rail{overflow-y:auto}
+  .plaque{max-width:240px;margin:0 auto;padding:8px}
+  .roomcode{justify-content:center}
   .roomcode .v{font-size:16px}
   .panel .body{padding:10px 9px}
   .helper{font-size:11px}
