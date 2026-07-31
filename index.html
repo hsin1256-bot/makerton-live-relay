@@ -437,6 +437,13 @@ body[data-cast="live"] .cast-badge i{box-shadow:0 0 10px var(--tally);animation:
 
 /* ── responsive ────────────────────────────────────────── */
 @media (max-width:1120px){
+  .console{grid-template-columns:minmax(0,1fr) 232px}
+  .plaque{padding:8px}
+  .roomcode .v{font-size:16px}
+  .panel .body{padding:10px 9px}
+  .helper{font-size:11px}
+}
+@media (max-width:480px){
   body{overflow:auto}
   .shell{height:auto;min-height:100%}
   .console{grid-template-columns:1fr}
