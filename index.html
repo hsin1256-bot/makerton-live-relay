@@ -612,7 +612,7 @@ body[data-cast="live"] .cast-badge i{box-shadow:0 0 10px var(--tally);animation:
 </div>
 
 <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/lib/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script>
 (() => {
 'use strict';
@@ -683,20 +683,23 @@ function bootViewer() {
     $('#castUrl').value = castLink();
 
     const plaque = $('#plaque');
-    if (typeof QRCode === 'undefined') {
+    if (typeof QRious === 'undefined') {
       plaque.className = 'plaque empty';
       plaque.textContent = 'QR 생성 실패 — 아래 주소를 폰에 직접 입력하세요';
       return;
     }
-    const cv = document.createElement('canvas');
-    QRCode.toCanvas(cv, castLink(), {
-      width: 640, margin: 1, errorCorrectionLevel: 'M',
-      color: { dark: '#0A0D13FF', light: '#F2EFE6FF' },
-    }, (err) => {
-      if (err) { plaque.className = 'plaque empty'; plaque.textContent = 'QR 생성 실패'; return; }
+    try {
+      const cv = document.createElement('canvas');
+      new QRious({
+        element: cv, value: castLink(), size: 640, level: 'M',
+        background: '#F2EFE6', foreground: '#0A0D13',
+      });
       plaque.className = 'plaque';
       plaque.replaceChildren(cv);
-    });
+    } catch (e) {
+      plaque.className = 'plaque empty';
+      plaque.textContent = 'QR 생성 실패 — 아래 주소를 폰에 직접 입력하세요';
+    }
   }
 
   /* ── signalling ── */
